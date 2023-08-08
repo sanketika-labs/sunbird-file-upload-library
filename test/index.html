@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" name="file" id="fileInput">
+    <button onclick="uploadFile()">Upload File</button>
+    <button onclick="retry()">Retry</button>
+    <script src="../dist/sunbird-file-upload-library.js"></script>
+    <script>
+        const uploader =  new sunbirdFileUploadLib.FileUploader()
+        function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            const url = ""
+            uploader.upload({url, file, csp: "azure", maxFileSizeForChunking: 50})
+            .on("error", (error) => console.log(error))
+            .on("progress", (progress) => console.log(progress))
+            .on("completed", (completed) => console.log(completed))
+            // uploader.retry()
+        }
+
+        function retry() {
+            uploader.retry()
+        }
+
+    </script>
+</body>
+
+</html>
