@@ -1,13 +1,14 @@
 {
-  "name": "sunbird-file-upload-library",
-  "version": "1.0.0",
+  "name": "@project-sunbird/sunbird-file-upload-library",
+  "version": "1.0.1",
   "description": "",
   "source": "lib/index.js",
   "main": "dist/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js",
-    "watch": "webpack --config webpack.config.js --watch"
+    "watch": "webpack --config webpack.config.js --watch",
+    "pre-publish": "npm run build && cp package.json ./dist/package.json"
   },
   "keywords": [
     "sunbird",

@@ -6,7 +6,7 @@ module.exports = {
   output: {
     filename: 'sunbird-file-upload-library.js',
     path: path.resolve(__dirname, 'dist'),
-    library: 'sunbirdFileUploadLib',
+    library: 'SunbirdFileUploadLib',
     libraryTarget: 'umd',
     globalObject: 'this',
   },
