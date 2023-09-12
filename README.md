@@ -70,3 +70,48 @@ uploader.retry()
   });
 ```
 
+Note: Currently this library only supports for the azure cloud provider, to entend the library to support for other cloud providers follow the below steps.
+
+### How to extended to other cloud providers
+
+
+1. Go to index.js file in lib folder and add your cloud provider name in the switch case
+2. Create a file with the cloud provider name which will have a class exported from it.
+3. The cloud provider class created in previous steps should have `retry` method as public and follow the same method signature as azure
+
+Example: 
+
+```javascript
+
+  export class SampleCloud {
+
+    upload() {
+      // single file upload when the file size is less than or equal to maxFileSizeChunking
+    }
+
+    uploadInChunks() {
+      // based in maxFileSizeChunking logic this will execute and write logic for same for your cloud provider
+    }
+
+    retry() {
+
+      // retry logic
+    }
+
+  }
+
+```
+4. Inside  index.js create the instance of your cloud class and assign to `this.uploaderInstance` like
+
+  ```javascript
+    this.uploaderInstance = new SampleCloud(url, file, maxFileSizeForChunking, this.emit)
+
+  ```
+5. Your class methods can emit `error`, `progress`, `completed` events based on the condition of upload status.
+6. `error` should emit error object, `completed` should emit the httpstatus `{status: <http-status-code>}` and `progress` will emit the following object
+  ```javascript
+                        {
+                                "progress": <progress-value>,
+                                estimated: <estimated-time-in-seconds> // this is optional
+                        }
+  ```
