@@ -39,4 +39,4 @@ jobs:
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Run test
-        run: npm run test
+        run: npm run test --no-sandbox
